@@ -14,5 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    \App\Services\QueueInjectorService\QueueInjectorService::setInjectors([
+        \App\Jobs\InjectorHandlers\AuthenticationInjector::class
+    ]);
+
+    // Any dispatched job from here will have AuthenticationInjector::data
+    // then while processing the job AuthenticationInjector::handle
+    // will be executed
+
+    \App\Jobs\TestJob::dispatchSync();
 });
