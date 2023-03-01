@@ -20,7 +20,7 @@ class QueueInjectorService
             foreach ($injectors as $injector) {
                 $injectorInstance = app($injector);
 
-                if ($injectorInstance instanceof  ) {
+                if ($injectorInstance instanceof QueueInjectorInterface) {
                     $payloadData['injectors'][$injector] = $injectorInstance->data();
                 }
             }
