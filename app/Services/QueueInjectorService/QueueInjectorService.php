@@ -2,6 +2,7 @@
 
 namespace App\Services\QueueInjectorService;
 
+use App\Services\QueueInjectorService\Interfaces\QueueInjectorInterface;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Support\Facades\Queue;
 
@@ -19,7 +20,9 @@ class QueueInjectorService
             foreach ($injectors as $injector) {
                 $injectorInstance = app($injector);
 
-                $payloadData['injectors'][$injector] = $injectorInstance->data();
+                if ($injectorInstance instanceof  ) {
+                    $payloadData['injectors'][$injector] = $injectorInstance->data();
+                }
             }
 
             return $payloadData;
@@ -40,8 +43,8 @@ class QueueInjectorService
         });
     }
 
-    public static function setInjectors($injector): void
+    public static function setInjectors($injectors): void
     {
-        self::$injectors = $injector;
+        self::$injectors = $injectors;
     }
 }
