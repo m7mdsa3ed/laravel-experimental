@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+usleep(500000); // 0.5 seconds
+
+Route::get('/web', function () {
     return view('welcome');
 });
